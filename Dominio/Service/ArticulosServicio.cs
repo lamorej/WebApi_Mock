@@ -1,6 +1,7 @@
 ﻿using System;
 using DTOs;
 using Data.Interfaces;
+using System.Threading.Tasks;
 
 namespace Dominio.Service
 {
@@ -17,22 +18,22 @@ namespace Dominio.Service
         }
 
 
-        public Articulo InsertarArticulo(string contenido, string titulo, int autorId)
+        public async Task<Articulo> InsertarArticuloAsync(string contenido, string titulo, int autorId)
         {
-            if (!_autorRepository.AutorValido(autorId))
+            if (! await _autorRepository.AutorValidoAsync(autorId))
             {
                 throw new Exception("Autor not valido");
             }
 
 
-            var articuloId = _articuloRepository.InsertarArticulo(contenido, titulo, autorId);
+            var articuloId = await _articuloRepository.InsertarArticuloAsync(contenido, titulo, autorId);
 
-            return ConsultarArticulo(articuloId);
+            return await ConsultarArticuloAsync(articuloId);
         }
 
-        public Articulo ConsultarArticulo(int id)
+        public async Task<Articulo> ConsultarArticuloAsync(int id)
         {
-            return _articuloRepository.GetArticulo(id);
+            return await _articuloRepository.GetArticuloAsync(id);
         }
 
     }

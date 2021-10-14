@@ -1,10 +1,11 @@
 ﻿using DTOs;
+using System.Threading.Tasks;
 
 namespace Data.Interfaces
 {
     public interface IAutorRepository
     {
-        Autor GetAutor(int id);
-        bool AutorValido(int id);
+        Task<Autor> GetAutorAsync(int id);
+        Task<bool>  AutorValidoAsync(int id);
     }
 }

@@ -1,10 +1,13 @@
 ﻿using DTOs;
+using System.Threading.Tasks;
 
 namespace Data.Interfaces
 {
     public interface IArticulosRepository
     {
-        int InsertarArticulo(string contenido, string titulo, int autorId);
-        Articulo GetArticulo(int id);
+     
+        Task<int> InsertarArticuloAsync(string contenido, string titulo, int autorId);
+        Task<Articulo> GetArticuloAsync(int id);
+      
     }
 }

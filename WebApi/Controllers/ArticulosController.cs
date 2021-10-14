@@ -1,10 +1,11 @@
 ﻿using Dominio.Service;
 using DTOs;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace WebAPI.Controllers
 {
-    public class ArticulosController : ControllerBase //ApiController
+    public class ArticulosController : ControllerBase 
     {
         private readonly ArticulosServicio _articulosServicio;
         public ArticulosController(ArticulosServicio articulosServicio)
@@ -14,18 +15,18 @@ namespace WebAPI.Controllers
 
         [HttpPost]
         [Route("Articulo")]
-        public Articulo InsertarArticulo(string contenido, string titulo, int autor)
+        public async Task<Articulo> InsertarArticuloAsync(string contenido, string titulo, int autor)
         {
-            var resultado = _articulosServicio.InsertarArticulo(contenido, titulo, autor);
+            var resultado = await _articulosServicio.InsertarArticuloAsync(contenido, titulo, autor);
 
             return resultado;
         }
 
         [HttpGet]
         [Route("Articulo/{id}")]
-        public Articulo ConsultarArticulo(int id)
+        public async Task<Articulo> ConsultarArticuloAsync(int id)
         {
-            var resultado = _articulosServicio.ConsultarArticulo(id);
+            var resultado = await _articulosServicio.ConsultarArticuloAsync(id);
 
             return resultado;
         }
